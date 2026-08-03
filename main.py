@@ -3,11 +3,25 @@ def display_header():
     print("Maternal Health Screening Assistant")
     print("Version 0.3")
     print("===============================")
-
+def calculate_bmi(weight, height):
+    if height > 0:
+        return weight/(height**2)
+    else:
+        return 0
 def get_patient_information():
     patient_name = input("Enter patient's name: ").title().strip()
     age = int(input("Enter patient's age: ").strip())
-    weeks_pregnant = int(input("Enter number of weeks pregnant (e.g 20): ").strip())
+    weeks_pregnant = int(input("Enter number of weeks pregnant (e.g. 20): ").strip())
+    previous_pregnancies = int(
+        input("How many pregnancies have you had (including this one)? ").strip()
+    )
+    previous_miscarriages = int(input("How many miscarriages have you had? ").strip())
+    previous_caesarean_section = int(
+        input("How many caesarean sections have you had? ").strip()
+    )
+    weight = float(input("Enter patient's weight (in kg): ").strip())
+    height = float(input("Enter patient's height (in meters): ").strip())
+    bmi =calculate_bmi(weight, height)
     temperature = float(input("Enter patient's temperature(in celsius): ").strip())
     hospital = input('Enter hospital name: ').title().strip()
     symptoms = input("Enter patient's symptoms (comma-separated): ").lower().strip().split(',')
@@ -15,20 +29,38 @@ def get_patient_information():
     diastolic_bp = int(input("Enter diastolic blood pressure(mmHg): ").strip())
     bleeding = input("Are you bleeding or did you bleed?(Yes/No)").strip().lower()
 
-    return patient_name, age, weeks_pregnant, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding
+    return patient_name, age, weeks_pregnant, previous_pregnancies, previous_miscarriages,previous_caesarean_section,weight, height,bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding
 
+def bmi_category(bmi):
+    if bmi < 18.5:
+           return "⚠️ Underweight"
+    
+    elif bmi < 25:
+                return "✅ Normal BMI"      
+    
+    elif bmi < 30:
+                return "⚠️ Overweight"
 
+    else:
+                return "⚠️ Obese"
 
-def display_patient_information(patient_name, age, weeks_pregnant, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding): 
+def display_patient_information(patient_name, age, weeks_pregnant, previous_pregnancies,previous_miscarriages,previous_caesarean_section, weight, height, bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding): 
     print("\n ============PATIENT INFORMATION============")
     print (f"Patient Name: {patient_name}")
     print(f"Age: {age}")
     print(f"Weeks Pregnant: {weeks_pregnant}")
+    print(f"Previous Pregnancies: {previous_pregnancies}")
+    print(f"Previous Miscarriages: {previous_miscarriages}")
+    print(f"Previous Caesarean Sections: {previous_caesarean_section}")
+    print(f"Weight: {weight} kg")
+    print(f"Height: {height} m")
+    print(f"BMI: {bmi:.2f} kg/m²")
+    print(bmi_category(bmi))
     print(f"Temperature: {temperature}°C")
     print(f"Hospital: {hospital}")
     print(f"Symptoms: {', '.join(symptoms)}")
     print(f"Blood Pressure : {systolic_bp}/{diastolic_bp} mmHg")
-    print(f"Bleeding: {bleeding}")
+    print(f"Bleeding: {bleeding.title()}")
 
 def display_screening_results(weeks_pregnant, temperature, systolic_bp, diastolic_bp, bleeding):
     print("\n============SCREENING RESULTS============")
@@ -50,19 +82,21 @@ def display_screening_results(weeks_pregnant, temperature, systolic_bp, diastoli
         print("⚠️ High blood pressure detected. Prompt medical assessment is recommended.")
     else:
         print("✅ Blood pressure is normal.")
+
     if bleeding == "yes":
         print("⚠️ Bleeding detected. Please seek immediate medical attention.")
     else:
         print("✅ No bleeding detected.")
 
 
-def display_overall_assessment(weeks_pregnant, temperature, systolic_bp, diastolic_bp, bleeding):
-    print("\n------------ OVERALL ASSESSMENT ------------")
-    if temperature >= 38 and (systolic_bp >= 140 or diastolic_bp >= 90) and bleeding =="yes":
+def display_overall_assessment(temperature, systolic_bp, diastolic_bp, bleeding):
+    print("\n============ OVERALL ASSESSMENT ============")
+
+    if temperature >= 38 and (systolic_bp >= 140 or diastolic_bp >= 90) and bleeding == "yes":
         print("🚨 HIGH RISK PATIENT")
         print("Multiple warning signs detected.")
         print("Prompt medical assessment is recommended.")
-    elif temperature >= 38 or (systolic_bp >= 140 or diastolic_bp >= 90) or bleeding =="yes":
+    elif temperature >= 38 or (systolic_bp >= 140 or diastolic_bp >= 90) or bleeding == "yes":
         print("⚠️ Caution")
         print("Some warning signs detected.")
         print("Medical assessment is recommended.")
@@ -72,7 +106,7 @@ def display_overall_assessment(weeks_pregnant, temperature, systolic_bp, diastol
 
 
 def display_symptoms_analysis(symptoms):
-    print("\n------------ symptoms analysis ------------")
+    print("\n============ Symptoms Analysis ============")
     dangerous_symptoms = [
         "fever",
         "severe headache",
@@ -83,23 +117,31 @@ def display_symptoms_analysis(symptoms):
         "convulsion",
         "bleeding",
         "vomiting",
-        "loss of consciousness"
-            ]
+        "loss of consciousness",
+    ]
     danger_found = False
+
     for symptom in symptoms:
         symptom = symptom.strip()
         if symptom in dangerous_symptoms:
             danger_found = True
             print(f"⚠️ {symptom.title()} detected. Please seek immediate medical attention.")
+
     if not danger_found:
         print("✅ No dangerous symptoms detected.")
 
 display_header()
-patient_name, age, weeks_pregnant, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding = get_patient_information() 
+patient_name, age, weeks_pregnant, previous_pregnancies, previous_miscarriages,previous_caesarean_section, weight, height, bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding = get_patient_information() 
 display_patient_information(
     patient_name,
     age,
     weeks_pregnant,
+    previous_pregnancies,
+    previous_miscarriages,
+    previous_caesarean_section,
+    weight,
+    height,
+    bmi,
     temperature,
     hospital,
     symptoms,
@@ -114,5 +156,5 @@ display_screening_results(
     diastolic_bp, 
     bleeding ) 
 
-display_overall_assessment(weeks_pregnant, temperature, systolic_bp, diastolic_bp, bleeding)
+display_overall_assessment(temperature, systolic_bp, diastolic_bp, bleeding)
 display_symptoms_analysis(symptoms)

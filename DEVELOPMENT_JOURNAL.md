@@ -155,6 +155,9 @@ Version: 0.3
 
 - Refactored the Maternal Health Screening Assistant using functions.
 - Separated the application into different sections for collecting patient information, displaying information, screening, overall assessment, and symptom analysis.
+  -Added BMI calculation and classification
+- Added previous pregnancy, miscarriage, and Caesarean section history
+- Added weight and height collection
 
 ### What I Learned
 
@@ -163,14 +166,18 @@ Version: 0.3
 - How `return` sends values back to the main program.
 - The difference between parameters and arguments.
 - Why functions make code cleaner and easier to maintain.
+- The difference between returning values and printing them
+- How one function can call another function
+- How to organize a program into smaller, reusable parts
 
 ### Biggest Challenge
 
-Understanding how information moves between functions. At first, I wasn't sure how one function could access data collected in another function.
+- Understanding how information moves between functions. At first, I wasn't sure how one function could access data collected in another function.
+- Understanding when a function should return a value instead of printing it directly.
 
 ### How I Solved It
 
-I learned that a function can return values to the main program, and those values can then be passed to other functions as arguments. Once I understood this flow, the structure of the program made much more sense.
+I learnt that a function can return values to the main program, and those values can then be passed to other functions as arguments. Once I understood this flow, the structure of the program made much more sense.I also learnt that functions that calculate or determine something should usually return a value, while display functions are responsible for printing the output.
 
 ### Questions
 
@@ -179,6 +186,7 @@ I learned that a function can return values to the main program, and those value
 
 ### Ideas
 
-- Add more antenatal screening questions such as urine protein, urine glucose, weight, and height.
-- Automatically calculate BMI.
+- Add more antenatal screening questions such as urine protein, urine glucose
 - Add patient record storage using CSV files.
+- Add input validation
+- Begin building a more realistic antenatal assessment
