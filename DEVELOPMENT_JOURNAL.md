@@ -144,3 +144,41 @@ I realised that Python checks each symptom entered by the user one at a time aga
 - AI-assisted recommendations
 - Save patient records
 - Build a web dashboard
+
+## Session 4
+
+Date: 3 August 2026
+
+Version: 0.3
+
+### Feature Built
+
+- Refactored the Maternal Health Screening Assistant using functions.
+- Separated the application into different sections for collecting patient information, displaying information, screening, overall assessment, and symptom analysis.
+
+### What I Learned
+
+- How to create functions using `def`.
+- The difference between defining a function and calling it.
+- How `return` sends values back to the main program.
+- The difference between parameters and arguments.
+- Why functions make code cleaner and easier to maintain.
+
+### Biggest Challenge
+
+Understanding how information moves between functions. At first, I wasn't sure how one function could access data collected in another function.
+
+### How I Solved It
+
+I learned that a function can return values to the main program, and those values can then be passed to other functions as arguments. Once I understood this flow, the structure of the program made much more sense.
+
+### Questions
+
+- Should patient information eventually be stored in a dictionary instead of returning many individual variables?
+- How should patient records be saved and retrieved in future versions?
+
+### Ideas
+
+- Add more antenatal screening questions such as urine protein, urine glucose, weight, and height.
+- Automatically calculate BMI.
+- Add patient record storage using CSV files.
