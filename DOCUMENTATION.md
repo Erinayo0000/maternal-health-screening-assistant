@@ -329,3 +329,26 @@ Every new feature should be:
 - Clinically meaningful
 - Built using evidence from maternal health research
 - Designed for future AI integration
+
+### Current Patient Information Collected
+
+The current prototype collects:
+
+- Patient name and age
+- Weeks of pregnancy
+- Previous pregnancies
+- Previous miscarriages
+- Previous caesarean sections
+- Weight and height
+- BMI
+- Temperature
+- Symptoms
+- Blood pressure
+- Bleeding status
+- Urine protein result
+- Urine glucose result
+- Fetal movement
+
+The system currently provides trimester classification, temperature screening, blood-pressure screening, bleeding screening, BMI classification, symptom analysis and urine-test results.
+
+Some collected variables are currently displayed but are not yet incorporated into the overall risk assessment. These will be integrated as the screening logic develops.

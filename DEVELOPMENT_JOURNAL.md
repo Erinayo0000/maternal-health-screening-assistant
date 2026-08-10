@@ -190,3 +190,25 @@ I learnt that a function can return values to the main program, and those values
 - Add patient record storage using CSV files.
 - Add input validation
 - Begin building a more realistic antenatal assessment
+
+## Session 5
+
+## August 10, 2026
+
+Today I continued working on Project Asteria. I added more patient information to the maternal health screening assistant, including urine protein, urine glucose and fetal movement.
+
+I also created a separate function for displaying urine test results. I am beginning to understand that collecting information and actually using that information in the screening logic are two different things. At the moment, some of the information I collect is displayed but is not yet included in the overall assessment.
+
+One thing I want to improve next is how the different warning signs are combined to produce a more meaningful assessment instead of treating each result separately.
+
+### Reading
+
+I read Chapters 7 and 8 of _Invisible Women_ by Caroline Criado Perez.
+
+Chapter 7 made me think about how products and tools can be designed without properly considering the people who will actually use them. Chapter 8 made me think about how gaps and biases in medical research can affect women's healthcare and diagnosis.
+
+This raised an important question for Project Asteria: if the medical data used to develop healthcare systems is not sufficiently representative of women, how might that affect an AI system designed for women's health?
+
+### Next step
+
+Continue improving the screening logic and make the information already collected contribute to the overall assessment.

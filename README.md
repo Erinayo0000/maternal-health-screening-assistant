@@ -59,3 +59,11 @@ Healthcare workers need a simple, reliable, and easy-to-use screening tool that 
 ## Long-Term Vision
 
 To develop an AI-powered maternal health assistant that enables healthcare workers to detect pregnancy complications earlier, improve clinical decision-making, and ultimately reduce preventable maternal deaths worldwide.
+
+## Current Features (Version 0.1)
+
+- BMI calculation and classification
+- Pregnancy history
+- Urine protein and glucose screening
+- Fetal movement tracking
+- Symptom analysis

@@ -68,3 +68,17 @@ Date: 3 August 2026
 - Organized the code into smaller, reusable functions.
 - Separated data collection, screening, and display into different parts of the program.
 - Made the code easier to read, understand, and maintain.
+
+## Version 0.3 — August 10, 2026
+
+### Added
+
+- Added urine protein and urine glucose test inputs.
+- Added fetal movement input.
+- Added urine test screening results.
+- Improved patient information display.
+- Improved input prompts and formatting.
+
+### Notes
+
+The screening assistant is still a rule-based prototype. Some collected information, including fetal movement and urine test results, is not yet included in the overall risk assessment.
