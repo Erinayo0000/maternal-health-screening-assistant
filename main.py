@@ -13,11 +13,11 @@ def get_patient_information():
     age = int(input("Enter patient's age: ").strip())
     weeks_pregnant = int(input("Enter number of weeks pregnant (e.g. 20): ").strip())
     previous_pregnancies = int(
-        input("How many pregnancies have you had (including this one)? ").strip()
+        input("How many pregnancies have you had (including this one)? (e.g. 20): ").strip()
     )
-    previous_miscarriages = int(input("How many miscarriages have you had? ").strip())
+    previous_miscarriages = int(input("How many miscarriages have you had? (e.g. 2): ").strip())
     previous_caesarean_section = int(
-        input("How many caesarean sections have you had? ").strip()
+        input("How many caesarean sections have you had? (e.g. 1): ").strip()
     )
     weight = float(input("Enter patient's weight (in kg): ").strip())
     height = float(input("Enter patient's height (in meters): ").strip())
@@ -27,9 +27,12 @@ def get_patient_information():
     symptoms = input("Enter patient's symptoms (comma-separated): ").lower().strip().split(',')
     systolic_bp = int(input("Enter systolic blood pressure (mmHg): ").strip())
     diastolic_bp = int(input("Enter diastolic blood pressure(mmHg): ").strip())
-    bleeding = input("Are you bleeding or did you bleed?(Yes/No)").strip().lower()
+    bleeding = input("Are you bleeding or did you bleed?(Yes/No): ").strip().lower()
+    urine_protein = input( "Urine protein test result (Positive/Negative): ").strip().lower()
+    urine_glucose = input("Urine glucose test result(Positive/negative) : ").strip().lower()
+    fetal_movement = input("fetal Movement(Normal / Reduced / None) : ").strip().lower()
 
-    return patient_name, age, weeks_pregnant, previous_pregnancies, previous_miscarriages,previous_caesarean_section,weight, height,bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding
+    return patient_name, age, weeks_pregnant, previous_pregnancies, previous_miscarriages,previous_caesarean_section,weight, height,bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding, urine_protein,urine_glucose,fetal_movement
 
 def bmi_category(bmi):
     if bmi < 18.5:
@@ -44,7 +47,7 @@ def bmi_category(bmi):
     else:
                 return "⚠️ Obese"
 
-def display_patient_information(patient_name, age, weeks_pregnant, previous_pregnancies,previous_miscarriages,previous_caesarean_section, weight, height, bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding): 
+def display_patient_information(patient_name, age, weeks_pregnant, previous_pregnancies,previous_miscarriages,previous_caesarean_section, weight, height, bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding, urine_protein,urine_glucose, fetal_movement): 
     print("\n ============PATIENT INFORMATION============")
     print (f"Patient Name: {patient_name}")
     print(f"Age: {age}")
@@ -61,7 +64,9 @@ def display_patient_information(patient_name, age, weeks_pregnant, previous_preg
     print(f"Symptoms: {', '.join(symptoms)}")
     print(f"Blood Pressure : {systolic_bp}/{diastolic_bp} mmHg")
     print(f"Bleeding: {bleeding.title()}")
-
+    print(f"Urine Protein: {urine_protein.title()}")  
+    print(f"Urine Glucose : {urine_glucose.title()}")  
+    print(f"Fetal Movement : {fetal_movement.title()}")     
 def display_screening_results(weeks_pregnant, temperature, systolic_bp, diastolic_bp, bleeding):
     print("\n============SCREENING RESULTS============")
     if weeks_pregnant <= 13:
@@ -87,7 +92,17 @@ def display_screening_results(weeks_pregnant, temperature, systolic_bp, diastoli
         print("⚠️ Bleeding detected. Please seek immediate medical attention.")
     else:
         print("✅ No bleeding detected.")
+def display_urine_test_results(urine_protein, urine_glucose):
+    print("\n============ Urine Test Results ============")
+    if urine_protein == "positive":
+        print("⚠️ Protein detected in urine. Please consult your healthcare provider.")
+    else:
+        print("✅ No protein detected in urine.")
 
+    if urine_glucose == "positive":
+        print("⚠️ Glucose detected in urine. Please consult your healthcare provider.")
+    else:
+        print("✅ No glucose detected in urine.")
 
 def display_overall_assessment(temperature, systolic_bp, diastolic_bp, bleeding):
     print("\n============ OVERALL ASSESSMENT ============")
@@ -131,7 +146,7 @@ def display_symptoms_analysis(symptoms):
         print("✅ No dangerous symptoms detected.")
 
 display_header()
-patient_name, age, weeks_pregnant, previous_pregnancies, previous_miscarriages,previous_caesarean_section, weight, height, bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding = get_patient_information() 
+patient_name, age, weeks_pregnant, previous_pregnancies, previous_miscarriages,previous_caesarean_section, weight, height, bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding ,  urine_protein, urine_glucose, fetal_movement = get_patient_information() 
 display_patient_information(
     patient_name,
     age,
@@ -147,7 +162,10 @@ display_patient_information(
     symptoms,
     systolic_bp,
     diastolic_bp,
-    bleeding
+    bleeding,
+    urine_protein,
+    urine_glucose,
+    fetal_movement
 )
 display_screening_results(
     weeks_pregnant, 
@@ -158,3 +176,4 @@ display_screening_results(
 
 display_overall_assessment(temperature, systolic_bp, diastolic_bp, bleeding)
 display_symptoms_analysis(symptoms)
+display_urine_test_results(urine_protein, urine_glucose)
