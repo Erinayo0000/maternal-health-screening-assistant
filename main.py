@@ -47,6 +47,16 @@ def bmi_category(bmi):
     else:
                 return "⚠️ Obese"
 
+def fetal_movement_category(fetal_movement):
+     if fetal_movement =="normal":
+            return "✅ Fetal movement is normal."
+     elif fetal_movement =="reduced":
+            return "⚠️ Fetal movement is reduced. Please consult your healthcare provider." 
+     elif fetal_movement =="none":
+            return "⚠️ No fetal movement detected. Please seek immediate medical attention."
+     else:
+            return "⚠️ Invalid fetal movement input. Please enter 'Normal', 'Reduced', or 'None'."
+
 def display_patient_information(patient_name, age, weeks_pregnant, previous_pregnancies,previous_miscarriages,previous_caesarean_section, weight, height, bmi, temperature, hospital, symptoms, systolic_bp, diastolic_bp, bleeding, urine_protein,urine_glucose, fetal_movement): 
     print("\n ============PATIENT INFORMATION============")
     print (f"Patient Name: {patient_name}")
@@ -66,7 +76,7 @@ def display_patient_information(patient_name, age, weeks_pregnant, previous_preg
     print(f"Bleeding: {bleeding.title()}")
     print(f"Urine Protein: {urine_protein.title()}")  
     print(f"Urine Glucose : {urine_glucose.title()}")  
-    print(f"Fetal Movement : {fetal_movement.title()}")     
+    print(f"Fetal Movement : {fetal_movement_category(fetal_movement).title()}")     
 def display_screening_results(weeks_pregnant, temperature, systolic_bp, diastolic_bp, bleeding):
     print("\n============SCREENING RESULTS============")
     if weeks_pregnant <= 13:
@@ -104,20 +114,82 @@ def display_urine_test_results(urine_protein, urine_glucose):
     else:
         print("✅ No glucose detected in urine.")
 
-def display_overall_assessment(temperature, systolic_bp, diastolic_bp, bleeding):
+def display_overall_assessment(
+    temperature,
+    systolic_bp,
+    diastolic_bp,
+    bleeding,
+    urine_protein,
+    urine_glucose,
+    symptoms
+):
     print("\n============ OVERALL ASSESSMENT ============")
 
-    if temperature >= 38 and (systolic_bp >= 140 or diastolic_bp >= 90) and bleeding == "yes":
-        print("🚨 HIGH RISK PATIENT")
-        print("Multiple warning signs detected.")
+    warning_count = 0
+    warnings = []
+
+    if temperature >= 38:
+        warning_count += 1
+        warnings.append("High temperature")
+    if systolic_bp >= 140 or diastolic_bp >= 90:
+        warning_count += 1
+        warnings.append("High blood pressure")
+
+    if bleeding == "yes":
+        warning_count += 1
+        warnings.append("Bleeding")
+    if urine_protein == "positive":
+        warning_count += 1
+        warnings.append("Protein in urine")
+    if urine_glucose == "positive":
+        warning_count += 1
+        warnings.append("Glucose in urine")
+
+    dangerous_symptoms = [
+        "fever",
+        "severe headache",
+        "blurred vision",
+        "abdominal pain",
+        "swelling",
+        "shortness of breath",
+        "convulsion",
+        "bleeding",
+        "vomiting",
+        "loss of consciousness",
+    ]
+
+    danger_found = False
+
+    for symptom in symptoms:
+           symptom = symptom.strip()
+
+           if symptom in dangerous_symptoms:
+            danger_found = True
+ 
+            if symptom == "fever" and temperature >= 38:
+                 continue
+
+            if symptom.title() not in warnings:
+             warnings.append(symptom.title())
+             warning_count += 1
+        
+  
+       
+    print(f"Warning signs detected: {warning_count}")
+    for warning in warnings:
+      print(f"⚠️ {warning}")
+
+    if warning_count >= 2:
+        print("🚨 MULTIPLE WARNING SIGNS DETECTED")
         print("Prompt medical assessment is recommended.")
-    elif temperature >= 38 or (systolic_bp >= 140 or diastolic_bp >= 90) or bleeding == "yes":
-        print("⚠️ Caution")
-        print("Some warning signs detected.")
+
+    elif warning_count == 1:
+        print("⚠️ WARNING SIGN DETECTED")
         print("Medical assessment is recommended.")
+
     else:
-        print("✅ Patient appears to be in stable condition.")
-        print("Continue regular monitoring and follow-up care.")
+        print("✅ No major warning signs detected by this screening tool.")
+        print("Continue routine antenatal care and follow-up.")
 
 
 def display_symptoms_analysis(symptoms):
@@ -174,6 +246,6 @@ display_screening_results(
     diastolic_bp, 
     bleeding ) 
 
-display_overall_assessment(temperature, systolic_bp, diastolic_bp, bleeding)
+display_overall_assessment(temperature, systolic_bp, diastolic_bp, bleeding, urine_protein, urine_glucose, symptoms)
 display_symptoms_analysis(symptoms)
 display_urine_test_results(urine_protein, urine_glucose)
