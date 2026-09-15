@@ -212,3 +212,13 @@ This raised an important question for Project Asteria: if the medical data used 
 ### Next step
 
 Continue improving the screening logic and make the information already collected contribute to the overall assessment.
+
+### session 6
+
+## September 15th 2026
+
+### Version 0.5 — Input Validation & Screening Logic Review
+
+Added validation for patient demographic, pregnancy history, physical measurements, vital signs, laboratory results, bleeding status, and fetal movement inputs. Added logical checks for pregnancy history values and basic sanity checks for measurements. Reviewed the screening logic to reduce duplicate warning counts and confirmed the trimester and warning-assessment flow.
+
+Learning: Improved understanding of try/except, while loops, conditional validation, input sanitization, lists, counters, and using relationships between patient inputs to prevent inconsistent data.
